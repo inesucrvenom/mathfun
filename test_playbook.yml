@@ -1,0 +1,50 @@
+# Create Lambda functions
+# https://pasztor.at/blog/make-aws-less-painful-with-lambda
+
+- hosts: localhost
+  tasks:
+    - name: "Packing up lambda code..."
+      archive:
+        dest: lambda.zip
+        path: src/
+        format: zip
+
+    - name: "Creating lambda IAM role..."
+      iam_role:
+        name: my-lambda-role
+        assume_role_policy_document: '{{ lookup("template", "config/role.json.j2") }}'
+        managed_policy: []
+
+    - name: "Creating lambda IAM policy..."
+      iam_policy:
+        iam_type: role
+        iam_name: "my-lambda-role"
+        policy_name: "my-lambda-policy"
+        state: present
+        policy_json: '{{ lookup("template", "config/policy.json.j2") }}'
+
+    - name: "Creating lambda function..."
+      lambda:
+        name: my-lambda
+        description: "something"
+        region: eu-central-1
+        role: "my-lambda-role"
+        handler: simple_lambda.my_handler # file name . function name
+        runtime: "python3.7"
+        zip_file: lambda.zip
+        timeout: 15
+
+#    - name: "test loop creation"
+#      lambda:
+#        name: '{{ item.name }}'
+#        state: present
+#        region: eu-central-1
+#        zip_file: '{{ item.zip_file }}'
+#        runtime: 'python3.7'
+#        role: ''
+#        handler: 'hello_python.my_handler'
+#      with items:
+#        - name: HelloWorld
+#          zip_file: hello-code.zip
+    #    - name: ByeBye
+    #      zip-file: bye-code.zip
