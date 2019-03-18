@@ -1,0 +1,59 @@
+# Deploy multiple Lambda functions
+# obligatory location: src/
+# obligatory name pattern: lambda*.py
+#
+# initial inspiration by:
+# https://pasztor.at/blog/make-aws-less-painful-with-lambda
+
+- hosts: localhost
+  tasks:
+    - name: "Cleaning up..."
+      file:
+        path: deploy
+        state: absent
+
+    - name: "Init..."
+      file:
+        path: deploy
+        state: directory
+
+    - name: "Get all Lambdas..."
+      find:
+        paths: src
+        patterns: "lambda*.py"
+      register: all_lambdas
+
+    - name: "Packing up Lambda code for each one..."
+      archive:
+        path: "{{ item.path }}"
+        dest: "deploy/{{ item.path | basename}}.zip"
+        format: zip
+      loop: "{{ all_lambdas.files }}"
+
+    - name: "Creating one IAM role for all Lambdas..."
+      iam_role:
+        name: my-lambda-role
+        assume_role_policy_document: '{{ lookup("template", "config/role.json.j2") }}'
+        managed_policy: []
+
+    - name: "Creating one IAM policy for all Lambdas..."
+      iam_policy:
+        iam_type: role
+        iam_name: "my-lambda-role"
+        policy_name: "my-lambda-policy"
+        state: present
+        policy_json: '{{ lookup("template", "config/policy.json.j2") }}'
+
+    - name: "Deploying all Lambda functions..."
+      lambda:
+        # remove .py from name
+        name: "{{ item.path | basename | splitext | first}}"
+        description: "{{ item.path | basename }}"
+        region: eu-central-1
+        role: "my-lambda-role"
+        # package.handler
+        handler: "{{ item.path | basename  | splitext | first}}.my_handler" # file name . function name
+        runtime: "python3.7"
+        zip_file: "deploy/{{ item.path | basename }}.zip"
+        timeout: 15
+      loop: "{{ all_lambdas.files }}"
