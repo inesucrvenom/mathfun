@@ -26,7 +26,7 @@
     - name: "Packing up Lambda code for each one..."
       archive:
         path: "{{ item.path }}"
-        dest: "deploy/{{ item.path | basename}}.zip"
+        dest: "deploy/{{ item.path | basename }}.zip"
         format: zip
       loop: "{{ all_lambdas.files }}"
 
@@ -47,12 +47,12 @@
     - name: "Deploying all Lambda functions..."
       lambda:
         # remove .py from name
-        name: "{{ item.path | basename | splitext | first}}"
+        name: "{{ item.path | basename | splitext | first }}"
         description: "{{ item.path | basename }}"
         region: eu-central-1
         role: "my-lambda-role"
         # package.handler
-        handler: "{{ item.path | basename  | splitext | first}}.my_handler" # file name . function name
+        handler: "{{ item.path | basename | splitext | first }}.my_handler" # file name . function name
         runtime: "python3.7"
         zip_file: "deploy/{{ item.path | basename }}.zip"
         timeout: 15
