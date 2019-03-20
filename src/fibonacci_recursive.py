@@ -2,7 +2,12 @@
 
 
 def fibonacci(n: int) -> int:
-    """Implement Fibonacci(n) recursively"""
+    """Implement Fibonacci(n) recursively
+
+    Raise:
+    - TypeError for given non integers
+    - ValueError for given negative integers
+    """
 
     if type(n) is not int:
         raise TypeError("n isn't integer")
