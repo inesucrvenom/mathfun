@@ -3,24 +3,21 @@
 initial inspiration by:
 http://blog.cesarcd.com/2017/07/sample-aws-lambda-client-written-in.html
 https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda.html#Lambda.Client.invoke
-
 """
 
 import boto3
 import json
 
 
-def invoke_lambda(lambda_name: str, params: json) -> json:
-    """Call lambda function by name, send given parameters.
-    Return json file from lambda's returned value
-    """
+def invoke_lambda(lambda_name: str, parameters: json) -> json:
+    """Call lambda on AWS, return json file from its returned value."""
     client = boto3.client('lambda')
 
     response = client.invoke(
         FunctionName=lambda_name,
         LogType='Tail',
         InvocationType='RequestResponse',
-        Payload=params,
+        Payload=parameters,
     )
 
     # get human readable Payload which is <botocore.response.StreamingBody>
@@ -28,19 +25,21 @@ def invoke_lambda(lambda_name: str, params: json) -> json:
     return response_json
 
 
-def create_params(values: dict) -> json:
-    """Create json for sending parameters to lambda"""
+def create_parameters(values: dict) -> json:
+    """Create json for sending parameters to Lambda"""
     return json.dumps(values)
 
 
-def print_result(function_name: str, param: dict):
-    """Call lambda with given name, send her parameters given in args
-    as dict {'n': value, 'm': value...}
-    Each lambda takes care of validating input
+def print_result(function_name: str, parameters: dict):
+    """Invoke lambda and print the result in a human readable form.
+
+    parameters -- dictionary formed like {'n': value, 'm': value...}
+
+    Each lambda takes care of validating input.
     """
-    result = invoke_lambda(function_name, create_params(param))
-    params = tuple(param.values())
-    print("{}{} = {}".format(function_name, params, result))
+    result = invoke_lambda(function_name, create_parameters(parameters))
+    parameters = tuple(parameters.values())
+    print("{}{} = {}".format(function_name, parameters, result))
 
 
 def run_all():

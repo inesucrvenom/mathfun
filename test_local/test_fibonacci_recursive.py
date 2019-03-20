@@ -1,10 +1,12 @@
+"""Test for fibonacci functions
+http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibtable.html
+"""
+
 import unittest
-from src.fibonacci_recursion import fibonacci
+from src.fibonacci_recursive import fibonacci
 
 
-class TestFibonacciRecursive(unittest.TestCase):
-    """http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibtable.html"""
-
+class Test_Logic_FibonacciRecursive(unittest.TestCase):
     def test_low_index(self):
         """Test for lower indices."""
         self.assertEqual(0, fibonacci(0))
@@ -18,27 +20,27 @@ class TestFibonacciRecursive(unittest.TestCase):
         self.assertEqual(28657, fibonacci(23))
 
     def test_different_representation(self):
-        """Ints given in various forms"""
+        """Ints given in various forms."""
         self.assertEqual(2584, fibonacci(0x12))   # f(18)
         self.assertEqual(2584, fibonacci(0o22))   # f(18)
         self.assertEqual(2584, fibonacci(0b10010))   # f(18)
 
-        # tuple of one int is int, whoa, that's new for me
+        # tuple of one int is int, whoa, that's new for me :-o
         self.assertEqual(3, fibonacci((4)))
 
     def test_wrong_value(self):
-        """Check wrong inputs by value"""
+        """Check wrong inputs by value."""
         with self.assertRaises(ValueError): fibonacci(-2)
         with self.assertRaises(ValueError): fibonacci((-2))
 
     def test_wrong_type(self):
-        """check wrong inputs by type"""
-        # looks like int
+        """Check wrong inputs by type."""
+        # those who looks like int
         with self.assertRaises(TypeError): fibonacci(3.0)
         with self.assertRaises(TypeError): fibonacci(0.0)
         with self.assertRaises(TypeError): fibonacci(-23.0)
 
-        # floats
+        # obvious floats
         with self.assertRaises(TypeError): fibonacci(3.5)
         with self.assertRaises(TypeError): fibonacci(-2.5)
 
