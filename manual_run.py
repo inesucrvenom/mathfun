@@ -9,8 +9,17 @@ import boto3
 import json
 
 
-def invoke_lambda(lambda_name: str, parameters: json) -> json:
-    """Call lambda on AWS, return json file from its returned value."""
+def invoke_lambda(lambda_name: str, parameters: json) -> (int, int):
+    """Call lambda on AWS.
+
+    Return
+    (result_json, result_status) : (int, int)
+        value of evaluation, http response code
+
+    Each lambda takes care of its parameters and validation.
+
+    Raise TypeError exception if json format changes.
+    """
     client = boto3.client('lambda')
 
     response = client.invoke(
@@ -20,9 +29,15 @@ def invoke_lambda(lambda_name: str, parameters: json) -> json:
         Payload=parameters,
     )
 
-    # get human readable Payload which is <botocore.response.StreamingBody>
-    response_json = json.loads(response['Payload'].read().decode("utf-8"))
-    return response_json
+    # defense from case if AWS changes output format
+    try:
+        result_status = int(response['StatusCode'])
+        # extract human readable Payload which is <botocore.response.StreamingBody>
+        result_json = int(json.loads(response['Payload'].read().decode("utf-8")))
+    except TypeError as e:
+        raise TypeError("format changed for AWS Lambda json result") from e
+    else:
+        return result_json, result_status
 
 
 def create_parameters(values: dict) -> json:
@@ -30,25 +45,31 @@ def create_parameters(values: dict) -> json:
     return json.dumps(values)
 
 
-# todo: I'm not sure if this function print + call could be split better
-def print_result(function_name: str, parameters: dict):
-    """Print the result of invoked lambda in a human readable form.
+def format_result(function_name: str, parameters: dict) -> str:
+    """Return the result of invoked lambda in a human readable form
+    when http response was 200 = OK.
 
     Arguments:
     parameters : dictionary {'n': value, 'm': value...}
         Label values so lambda can access them by name.
-
-    Each lambda takes care of validating input.
     """
-    result = invoke_lambda(function_name, create_parameters(parameters))
-    call_parameters = tuple(parameters.values())
-    print("{}{} = {}".format(function_name, call_parameters, result))
+    try:
+        result, status = invoke_lambda(function_name, create_parameters(parameters))
+    except TypeError as e:
+        raise e
+    else:
+        # todo: maybe we want to allow all between 200 and 299?
+        if status == 200:
+            call_parameters = tuple(parameters.values())
+            return "{}{} = {}".format(function_name, call_parameters, result)
+        else:
+            return "Error, check https://httpstatuses.com/{} for more info".format(status)
 
 
 def run_all():
     """Create own lambda invocations"""
-    print_result('lambda_simple_test', {'n': 33, 'm': 64, 'a': 14})
-#    print_result('lambda_fibonacci_recursion', {'n': 5})
+    print(format_result('lambda_simple_test', {'n': 33, 'm': 64, 'a': 14}))
+#   print(format_result('lambda_fibonacci_recursion', {'n': 5}))
 
 
 if __name__ == '__main__':
