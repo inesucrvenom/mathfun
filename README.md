@@ -42,20 +42,28 @@ pip install ansible
 ```
 ansible-playbook deploy_all_lambdas.yml
 ```
+
+## Usage
 - Run with example data
 ```
-python run_manually.py
+python manual_run.py
 ```
-  - To run with own data, just edit that file
-- Be happy seeing the results :)
+- To run with own data, just edit that file
 
-## Notes
-- Tests are available as both local (testing logic) 
-and lambda (seeing how big results you can get in short time)
+- Available tests:
+  - local - main purpose was testing logic 
+  - lambda - seeing responses and being able to evaluate big cases
+    + don't forget to be oneline and deploy lambdas before testing
+
 - If you want to create own lambda:
-  + filename starts with lambda eg `lambda_test_function`
-  + name handler `lambda_handler`
+  + filename starts with lambda eg: `lambda_test_function`
+  + name handler precisely: `lambda_handler`
   + put code into `src` folder
   + deploy and run as previously described
-  
-  Works only for single-file lambdas.
+  + **Note:** Works only for single-file lambdas. For now.
+
+Enjoy the results :)
+
+## todo:
++ test invoke_lambda, reduce tests for fibonacci recursive and 
+consequently for all future lambdas
