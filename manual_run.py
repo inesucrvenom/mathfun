@@ -30,16 +30,19 @@ def create_parameters(values: dict) -> json:
     return json.dumps(values)
 
 
+# todo: I'm not sure if this function print + call could be split better
 def print_result(function_name: str, parameters: dict):
-    """Invoke lambda and print the result in a human readable form.
+    """Print the result of invoked lambda in a human readable form.
 
-    parameters -- dictionary formed like {'n': value, 'm': value...}
+    Arguments:
+    parameters : dictionary {'n': value, 'm': value...}
+        Label values so lambda can access them by name.
 
     Each lambda takes care of validating input.
     """
     result = invoke_lambda(function_name, create_parameters(parameters))
-    parameters = tuple(parameters.values())
-    print("{}{} = {}".format(function_name, parameters, result))
+    call_parameters = tuple(parameters.values())
+    print("{}{} = {}".format(function_name, call_parameters, result))
 
 
 def run_all():
