@@ -22,6 +22,6 @@ def fibonacci(n: int) -> int:
     return fibonacci(n-1) + fibonacci(n-2)
 
 
-def my_handler(event, context):
+def lambda_handler(event, context):
     """Lambda function for recursive Fibonacci"""
-
+    return fibonacci(event['n'])
