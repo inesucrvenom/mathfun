@@ -1,9 +1,12 @@
 # mathfun
-Package with implementation of AWS Lambda functions 
-which compute several mathematical functions:
-- [Fibonacci](https://en.wikipedia.org/wiki/Fibonacci_number) R+B
+Package with implementation of several mathematical functions on AWS Lambda:
+- [Fibonacci](https://en.wikipedia.org/wiki/Fibonacci_number)
+    (implemented for non negative integers)
+     -> has recursive and simple iterative version (OMG that one is so fast!)
 - [Ackermann](https://en.wikipedia.org/wiki/Ackermann_function)
+
 - [Factorial](https://en.wikipedia.org/wiki/Factorial)
+    (implemented for non negative integers)
 
 Some are in recursive version only (R), others have better version (B) as well.
 
