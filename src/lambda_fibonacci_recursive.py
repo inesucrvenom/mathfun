@@ -1,8 +1,8 @@
-"""Fibonacci"""
+"""Fibonacci recursive implementation"""
 
 
 def fibonacci(n: int) -> int:
-    """Implement Fibonacci(n) recursively
+    """Implement Fibonacci recursively
 
     Raise:
     - TypeError for given non integers
@@ -23,5 +23,7 @@ def fibonacci(n: int) -> int:
 
 
 def lambda_handler(event, context):
-    """Lambda function for recursive Fibonacci"""
+    """Lambda function for recursive Fibonacci
+    """
+
     return fibonacci(event['n'])

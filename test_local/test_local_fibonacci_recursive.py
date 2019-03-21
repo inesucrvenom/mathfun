@@ -6,9 +6,9 @@ import unittest
 from src.lambda_fibonacci_recursive import fibonacci
 
 
-class Test_Fibonacci_Recursive(unittest.TestCase):
-    """Test recursive implementation of Fibonacci
-    """
+class Test_FibonacciRecursive_validInput(unittest.TestCase):
+    """Test correctness on valid input."""
+
     def test_correctness_valueForSmallIndices(self):
         self.assertEqual(0, fibonacci(0))
         self.assertEqual(1, fibonacci(1))
@@ -25,9 +25,16 @@ class Test_Fibonacci_Recursive(unittest.TestCase):
         self.assertEqual(2584, fibonacci(0o22))
         self.assertEqual(2584, fibonacci(0b10010))
 
+    def test_correctness_fakeTupleOfOne(self):
+        # this is not a tuple, but int; tuple is defined by comma
+        self.assertEqual(3, fibonacci((4)))
+
+
+class Test_FibonacciRecursive_invalidInput(unittest.TestCase):
+    """Test of handling exceptions sent through Fibonnaci."""
+
     def test_wrongValue_negativeIntegers(self):
         with self.assertRaises(ValueError): fibonacci(-2)
-        with self.assertRaises(ValueError): fibonacci((-2))
 
     def test_wrongType_lookLikeInteger(self):
         with self.assertRaises(TypeError): fibonacci(3.0)
@@ -54,10 +61,6 @@ class Test_Fibonacci_Recursive(unittest.TestCase):
         with self.assertRaises(TypeError): fibonacci(())
         with self.assertRaises(TypeError): fibonacci((1,))
         with self.assertRaises(TypeError): fibonacci((2, 3))
-
-    def test_correctness_fakeTupleOfOne(self):
-        # this is not a tuple, but int; tuple is defined by comma
-        self.assertEqual(3, fibonacci((4)))
 
 
 if __name__ == '__main__':
