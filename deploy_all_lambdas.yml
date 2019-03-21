@@ -42,7 +42,7 @@
         iam_name: 'my-lambda-role'
         policy_name: 'my-lambda-policy'
         state: present
-        policy_json: '{{ lookup("template", "config/policy.json.j2") }}'
+        policy_json: '{{ lookup("template", "config/policy_allowAll.json.j2") }}'
 
     - name: "Deploying all Lambda functions..."
       lambda:
