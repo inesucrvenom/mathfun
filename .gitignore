@@ -1,3 +1,4 @@
 deploy/
 venv/
 .idea/
+test_lambda/__pycache__
