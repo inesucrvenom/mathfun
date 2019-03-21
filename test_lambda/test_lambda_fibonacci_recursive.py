@@ -3,8 +3,6 @@
 Basically tests both correctness and basic integration.
 
 Deploy lambda to AWS before running this.
-
-http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibtable.html
 """
 
 import unittest
@@ -17,7 +15,7 @@ def call_lambda(val: int) -> int:
     return result
 
 
-class TestLambda_FibonacciRecursive_validInput(unittest.TestCase):
+class TestLambda_FibonacciRecursive_ValidInput(unittest.TestCase):
     """Test correctness on valid input."""
 
     def test_correctness_valueForSmallIndices(self):
@@ -41,7 +39,7 @@ class TestLambda_FibonacciRecursive_validInput(unittest.TestCase):
         self.assertEqual(3, call_lambda((4)))
 
 
-class TestLambda_FibonacciRecursive_invalidInput(unittest.TestCase):
+class TestLambda_FibonacciRecursive_InvalidInput(unittest.TestCase):
     """Test of handling exceptions sent through the lambda."""
 
     def test_wrongValue_negativeIntegers(self):
@@ -74,7 +72,7 @@ class TestLambda_FibonacciRecursive_invalidInput(unittest.TestCase):
         with self.assertRaises(TypeError): call_lambda((2, 3))
 
 
-class TestLambda_FibonacciRecursive_time(unittest.TestCase):
+class TestLambda_FibonacciRecursive_Time(unittest.TestCase):
     """Test correctness on valid input, or check time/timeout."""
 
     def test_time_30(self):

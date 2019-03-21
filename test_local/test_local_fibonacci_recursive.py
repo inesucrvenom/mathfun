@@ -1,12 +1,10 @@
-"""Test for recursive Fibonacci function
-http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibtable.html
-"""
+"""Test for recursive Fibonacci function"""
 
 import unittest
 from src.lambda_fibonacci_recursive import fibonacci
 
 
-class Test_FibonacciRecursive_validInput(unittest.TestCase):
+class Test_FibonacciRecursive_ValidInput(unittest.TestCase):
     """Test correctness on valid input."""
 
     def test_correctness_valueForSmallIndices(self):
@@ -30,7 +28,7 @@ class Test_FibonacciRecursive_validInput(unittest.TestCase):
         self.assertEqual(3, fibonacci((4)))
 
 
-class Test_FibonacciRecursive_invalidInput(unittest.TestCase):
+class Test_FibonacciRecursive_InvalidInput(unittest.TestCase):
     """Test of handling exceptions sent through Fibonnaci."""
 
     def test_wrongValue_negativeIntegers(self):
@@ -63,7 +61,7 @@ class Test_FibonacciRecursive_invalidInput(unittest.TestCase):
         with self.assertRaises(TypeError): fibonacci((2, 3))
 
 
-class Test_FibonacciRecursive_time(unittest.TestCase):
+class Test_FibonacciRecursive_Time(unittest.TestCase):
     """Test correctness on valid input, or check time/timeout."""
 
     def test_time_30(self):

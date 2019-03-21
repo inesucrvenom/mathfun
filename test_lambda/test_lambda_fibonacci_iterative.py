@@ -3,8 +3,6 @@
 Basically tests both correctness and basic integration.
 
 Deploy lambda to AWS before running this.
-
-http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibtable.html
 """
 
 import unittest
@@ -17,7 +15,7 @@ def call_lambda(val: int) -> int:
     return result
 
 
-class TestLambda_FibonacciIterative_validInput(unittest.TestCase):
+class TestLambda_FibonacciIterative_ValidInput(unittest.TestCase):
     """Test correctness on valid input."""
 
     def test_correctness_valueForSmallIndices(self):
@@ -41,7 +39,7 @@ class TestLambda_FibonacciIterative_validInput(unittest.TestCase):
         self.assertEqual(3, call_lambda((4)))
 
 
-class TestLambda_FibonacciIterative_invalidInput(unittest.TestCase):
+class TestLambda_FibonacciIterative_InvalidInput(unittest.TestCase):
     """Test of handling exceptions sent through the lambda."""
 
     def test_wrongValue_negativeIntegers(self):
@@ -74,7 +72,7 @@ class TestLambda_FibonacciIterative_invalidInput(unittest.TestCase):
         with self.assertRaises(TypeError): call_lambda((2, 3))
 
 
-class TestLambda_FibonacciIterative_time(unittest.TestCase):
+class TestLambda_FibonacciIterative_Time(unittest.TestCase):
     """Test correctness on valid input, or check time/timeout."""
 
     def test_time_30(self):
@@ -106,23 +104,19 @@ class TestLambda_FibonacciIterative_time(unittest.TestCase):
 
     def test_time_200(self):
         self.assertEqual(280571172992510140037611932413038677189525,
-                         call_lambda(200)
-                         )
+                         call_lambda(200))
 
     def test_time_300(self):
         self.assertEqual(222232244629420445529739893461909967206666939096499764990979600,
-                         call_lambda(300)
-                         )
+                         call_lambda(300))
 
     def test_time_500(self):
         self.assertEqual(139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125,
-                         call_lambda(500)
-                         )
+                         call_lambda(500))
 
     def test_time_1000(self):
         self.assertEqual(43466557686937456435688527675040625802564660517371780402481729089536555417949051890403879840079255169295922593080322634775209689623239873322471161642996440906533187938298969649928516003704476137795166849228875,
-                         call_lambda(1000)
-                         )
+                         call_lambda(1000))
 
 if __name__ == '__main__':
     unittest.main()
