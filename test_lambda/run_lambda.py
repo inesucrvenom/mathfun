@@ -26,14 +26,14 @@ def invoke_lambda(lambda_name: str, parameters: dict) -> (int, int):
         Payload=json.dumps(parameters),
     )
 
-    # extract human readable Payload which is <botocore.response.StreamingBody>
+    # extract human readable Payload of type <botocore.response.StreamingBody>
     result_json = json.loads(response['Payload'].read().decode("utf-8"))
 
     try:
         result_value = int(result_json)
 
     except TypeError as unspecified:
-        # propagate exact error message that lambda sent
+        # propagate exact error message sent by lambda
         if result_json["errorType"] == "TypeError":
             raise TypeError(result_json["errorMessage"]) from unspecified
         elif result_json["errorType"] == "ValueError":
@@ -45,7 +45,7 @@ def invoke_lambda(lambda_name: str, parameters: dict) -> (int, int):
         return result_value
 
 
-def format_result(function_name: str, parameters: dict) -> str:
+def show_result(function_name: str, parameters: dict) -> str:
     """Return the result of invoked lambda in a human readable form.
     Return reason if not computable, based on what lambda sent.
 
