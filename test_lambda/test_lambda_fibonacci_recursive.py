@@ -79,7 +79,7 @@ class TestLambda_FibonacciRecursive_Time(unittest.TestCase):
         self.assertEqual(832040, call_lambda(30))   # 11s
 
     def test_timeout(self):
-        with self.assertRaises(RuntimeError): call_lambda(31)   # 15s
+        with self.assertRaises(Exception): call_lambda(31)   # 15s
 
 
 if __name__ == '__main__':

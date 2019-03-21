@@ -40,9 +40,8 @@ def invoke_lambda(lambda_name: str, parameters: dict) -> (int, int):
         error_message = result_json["errorMessage"]
         try:
             type = result_json["errorType"]
-        except KeyError:
-            # e.g. timeout
-            raise RuntimeError(error_message)
+        except Exception as err:
+            raise Exception(error_message) from err
         else:
             # lambda invalid input
             if type == "TypeError":

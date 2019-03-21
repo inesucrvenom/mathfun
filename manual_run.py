@@ -11,7 +11,7 @@ def run_all():
     # print(show_result('lambda_fibonacci_recursive', {'n': "a"}))
     # print(show_result('lambda_fibonacci_recursive', {'k': 2}))
     # print(show_result('lambda_fibonacci_recursive', {'n': {}}))
-    # print(show_result('lambda_fibonacci_recursive', {'n': 31}))
+    print(show_result('lambda_fibonacci_recursive', {'n': 31}))
 
     # print(show_result('lambda_fibonacci_iterative', {'n': 2}))
     # print(show_result('lambda_fibonacci_iterative', {'n': -2}))
