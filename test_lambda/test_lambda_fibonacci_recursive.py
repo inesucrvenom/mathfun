@@ -1,4 +1,4 @@
-"""Test for fibonacci functions on AWS Lambda.
+"""Test for recursive fibonacci function on AWS Lambda.
 
 Basically tests both correctness and basic integration.
 
@@ -79,6 +79,17 @@ class TestLambda_FibonacciRecursive_invalidInput(unittest.TestCase):
         with self.assertRaises(TypeError): call_lambda((1,))
         with self.assertRaises(TypeError): call_lambda((2, 3))
 
+
+class TestLambda_FibonacciRecursive_validInput_bigIndices(unittest.TestCase):
+    """Test correctness on valid input, or check timeout.
+    Recursive version will fail"""
+
+    def test_correctness_bigIndices(self):
+        self.assertEqual(514229, call_lambda(29))
+        self.assertEqual(832040, call_lambda(30))
+
+    def test_timeout(self):
+        with self.assertRaises(RuntimeError): call_lambda(31)   # 15s
 
 if __name__ == '__main__':
     unittest.main()
