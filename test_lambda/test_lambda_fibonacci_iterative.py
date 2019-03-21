@@ -1,16 +1,10 @@
-"""Test for recursive fibonacci function on AWS Lambda.
+"""Test for iterative Fibonacci function on AWS Lambda.
 
 Basically tests both correctness and basic integration.
 
 Deploy lambda to AWS before running this.
 
 http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibtable.html
-
-Note:
-    Something from boto3 throws warning in the console:
-    ResourceWarning: unclosed <ssl.SSLSocket...
-    see more: https://github.com/boto/boto3/issues/454
-    It's still open issue, please ignore.
 """
 
 import unittest
@@ -19,11 +13,11 @@ from test_lambda.run_lambda import invoke_lambda
 
 def call_lambda(val: int) -> int:
     """Convert local call into more abstract one from manual_run"""
-    result = invoke_lambda('lambda_fibonacci_recursive', {'n': val})
+    result = invoke_lambda('lambda_fibonacci_iterative', {'n': val})
     return result
 
 
-class TestLambda_FibonacciRecursive_validInput(unittest.TestCase):
+class TestLambda_FibonacciIterative_validInput(unittest.TestCase):
     """Test correctness on valid input."""
 
     def test_correctness_valueForSmallIndices(self):
@@ -47,7 +41,7 @@ class TestLambda_FibonacciRecursive_validInput(unittest.TestCase):
         self.assertEqual(3, call_lambda((4)))
 
 
-class TestLambda_FibonacciRecursive_invalidInput(unittest.TestCase):
+class TestLambda_FibonacciIterative_invalidInput(unittest.TestCase):
     """Test of handling exceptions sent through the lambda."""
 
     def test_wrongValue_negativeIntegers(self):
@@ -80,16 +74,55 @@ class TestLambda_FibonacciRecursive_invalidInput(unittest.TestCase):
         with self.assertRaises(TypeError): call_lambda((2, 3))
 
 
-class TestLambda_FibonacciRecursive_validInput_bigIndices(unittest.TestCase):
-    """Test correctness on valid input, or check timeout.
-    Recursive version will fail"""
+class TestLambda_FibonacciIterative_time(unittest.TestCase):
+    """Test correctness on valid input, or check time/timeout."""
 
-    def test_correctness_bigIndices(self):
-        self.assertEqual(514229, call_lambda(29))
+    def test_time_30(self):
         self.assertEqual(832040, call_lambda(30))
 
-    def test_timeout(self):
-        with self.assertRaises(RuntimeError): call_lambda(31)   # 15s
+    def test_time_31(self):
+        self.assertEqual(1346269, call_lambda(31))
+
+    def test_time_32(self):
+        self.assertEqual(2178309, call_lambda(32))
+
+    def test_time_33(self):
+        self.assertEqual(3524578, call_lambda(33))
+
+    def test_time_34(self):
+        self.assertEqual(5702887, call_lambda(34))
+
+    def test_time_35(self):
+        self.assertEqual(9227465, call_lambda(35))
+
+    def test_time_36(self):
+        self.assertEqual(14930352, call_lambda(36))
+
+    def test_time_50(self):
+        self.assertEqual(12586269025, call_lambda(50))
+
+    def test_time_100(self):
+        self.assertEqual(354224848179261915075, call_lambda(100))
+
+    def test_time_200(self):
+        self.assertEqual(280571172992510140037611932413038677189525,
+                         call_lambda(200)
+                         )
+
+    def test_time_300(self):
+        self.assertEqual(222232244629420445529739893461909967206666939096499764990979600,
+                         call_lambda(300)
+                         )
+
+    def test_time_500(self):
+        self.assertEqual(139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125,
+                         call_lambda(500)
+                         )
+
+    def test_time_1000(self):
+        self.assertEqual(43466557686937456435688527675040625802564660517371780402481729089536555417949051890403879840079255169295922593080322634775209689623239873322471161642996440906533187938298969649928516003704476137795166849228875,
+                         call_lambda(1000)
+                         )
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,16 +1,10 @@
-"""Test for recursive fibonacci function on AWS Lambda.
+"""Test for recursive Fibonacci function on AWS Lambda.
 
 Basically tests both correctness and basic integration.
 
 Deploy lambda to AWS before running this.
 
 http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibtable.html
-
-Note:
-    Something from boto3 throws warning in the console:
-    ResourceWarning: unclosed <ssl.SSLSocket...
-    see more: https://github.com/boto/boto3/issues/454
-    It's still open issue, please ignore.
 """
 
 import unittest
@@ -80,16 +74,15 @@ class TestLambda_FibonacciRecursive_invalidInput(unittest.TestCase):
         with self.assertRaises(TypeError): call_lambda((2, 3))
 
 
-class TestLambda_FibonacciRecursive_validInput_bigIndices(unittest.TestCase):
-    """Test correctness on valid input, or check timeout.
-    Recursive version will fail"""
+class TestLambda_FibonacciRecursive_time(unittest.TestCase):
+    """Test correctness on valid input, or check time/timeout."""
 
-    def test_correctness_bigIndices(self):
-        self.assertEqual(514229, call_lambda(29))
-        self.assertEqual(832040, call_lambda(30))
+    def test_time_30(self):
+        self.assertEqual(832040, call_lambda(30))   # 11s
 
     def test_timeout(self):
         with self.assertRaises(RuntimeError): call_lambda(31)   # 15s
+
 
 if __name__ == '__main__':
     unittest.main()

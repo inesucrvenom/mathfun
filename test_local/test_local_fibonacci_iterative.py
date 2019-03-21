@@ -1,12 +1,12 @@
-"""Test for recursive fibonacci function
+"""Test for iterative Fibonacci function
 http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibtable.html
 """
 
 import unittest
-from src.lambda_fibonacci_recursive import fibonacci
+from src.lambda_fibonacci_iterative import fibonacci
 
 
-class Test_FibonacciRecursive_validInput(unittest.TestCase):
+class Test_FibonacciIterative_validInput(unittest.TestCase):
     """Test correctness on valid input."""
 
     def test_correctness_valueForSmallIndices(self):
@@ -30,7 +30,7 @@ class Test_FibonacciRecursive_validInput(unittest.TestCase):
         self.assertEqual(3, fibonacci((4)))
 
 
-class Test_FibonacciRecursive_invalidInput(unittest.TestCase):
+class Test_FibonacciIterative_invalidInput(unittest.TestCase):
     """Test of handling exceptions sent through Fibonnaci."""
 
     def test_wrongValue_negativeIntegers(self):
@@ -63,22 +63,55 @@ class Test_FibonacciRecursive_invalidInput(unittest.TestCase):
         with self.assertRaises(TypeError): fibonacci((2, 3))
 
 
-class Test_FibonacciRecursive_validInput_bigIndices(unittest.TestCase):
-    """Test correctness on valid input, or check timeout.
-    Recursive version will fail"""
+class Test_FibonacciIterative_time(unittest.TestCase):
+    """Test correctness on valid input, or check time/timeout."""
 
-    def test_correctness_bigIndices(self):
-        self.assertEqual(514229, fibonacci(29))
+    def test_time_30(self):
         self.assertEqual(832040, fibonacci(30))
 
-    def test_timeout(self):
-        # self.assertEqual(1346269, fibonacci(31))   # 6s
-        # self.assertEqual(2178309, fibonacci(32))   # 10s
-        # self.assertEqual(3524578, fibonacci(33))   # 15s
-        # self.assertEqual(5702887, fibonacci(34))   # 25s
-        # self.assertEqual(9227465, fibonacci(35))   # 35s
-        # self.assertEqual(14930352, fibonacci(36))   # 55s
-        pass
+    def test_time_31(self):
+        self.assertEqual(1346269, fibonacci(31))
+
+    def test_time_32(self):
+        self.assertEqual(2178309, fibonacci(32))
+
+    def test_time_33(self):
+        self.assertEqual(3524578, fibonacci(33))
+
+    def test_time_34(self):
+        self.assertEqual(5702887, fibonacci(34))
+
+    def test_time_35(self):
+        self.assertEqual(9227465, fibonacci(35))
+
+    def test_time_36(self):
+        self.assertEqual(14930352, fibonacci(36))
+
+    def test_time_50(self):
+        self.assertEqual(12586269025, fibonacci(50))
+
+    def test_time_100(self):
+        self.assertEqual(354224848179261915075, fibonacci(100))
+
+    def test_time_200(self):
+        self.assertEqual(280571172992510140037611932413038677189525,
+                         fibonacci(200)
+                         )
+
+    def test_time_300(self):
+        self.assertEqual(222232244629420445529739893461909967206666939096499764990979600,
+                         fibonacci(300)
+                         )
+
+    def test_time_500(self):
+        self.assertEqual(139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125,
+                         fibonacci(500)
+                         )
+
+    def test_time_1000(self):
+        self.assertEqual(43466557686937456435688527675040625802564660517371780402481729089536555417949051890403879840079255169295922593080322634775209689623239873322471161642996440906533187938298969649928516003704476137795166849228875,
+                         fibonacci(1000)
+                         )
 
 
 if __name__ == '__main__':

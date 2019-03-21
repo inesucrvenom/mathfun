@@ -1,4 +1,4 @@
-"""Test for recursive fibonacci function
+"""Test for recursive Fibonacci function
 http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibtable.html
 """
 
@@ -63,22 +63,29 @@ class Test_FibonacciRecursive_invalidInput(unittest.TestCase):
         with self.assertRaises(TypeError): fibonacci((2, 3))
 
 
-class Test_FibonacciRecursive_validInput_bigIndices(unittest.TestCase):
-    """Test correctness on valid input, or check timeout.
-    Recursive version will fail"""
+class Test_FibonacciRecursive_time(unittest.TestCase):
+    """Test correctness on valid input, or check time/timeout."""
 
-    def test_correctness_bigIndices(self):
-        self.assertEqual(514229, fibonacci(29))
-        self.assertEqual(832040, fibonacci(30))
+    def test_time_30(self):
+        self.assertEqual(832040, fibonacci(30))   # 3s
 
-    def test_timeout(self):
-        # self.assertEqual(1346269, fibonacci(31))   # 6s
-        # self.assertEqual(2178309, fibonacci(32))   # 10s
-        # self.assertEqual(3524578, fibonacci(33))   # 15s
-        # self.assertEqual(5702887, fibonacci(34))   # 25s
-        # self.assertEqual(9227465, fibonacci(35))   # 35s
-        # self.assertEqual(14930352, fibonacci(36))   # 55s
-        pass
+    def test_time_31(self):
+        self.assertEqual(1346269, fibonacci(31))   # 6s
+
+    def test_time_32(self):
+        self.assertEqual(2178309, fibonacci(32))   # 10s
+
+    def test_time_33(self):
+        self.assertEqual(3524578, fibonacci(33))   # 15s
+
+    def test_time_34(self):
+        self.assertEqual(5702887, fibonacci(34))   # 25s
+
+    def test_time_35(self):
+        self.assertEqual(9227465, fibonacci(35))   # 35s
+
+    def test_time_36(self):
+        self.assertEqual(14930352, fibonacci(36))   # 55s
 
 
 if __name__ == '__main__':

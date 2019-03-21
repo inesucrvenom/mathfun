@@ -1,8 +1,11 @@
-"""Fibonacci recursive implementation"""
+"""Fibonacci iterative implementation
+
+https://stackoverflow.com/questions/14661633/finding-out-nth-fibonacci-number-for-very-large-n/
+"""
 
 
 def fibonacci(n: int) -> int:
-    """Implement Fibonacci recursively
+    """Implement Fibonacci iteratively
 
     Raise:
     - TypeError for given non integers
@@ -16,14 +19,15 @@ def fibonacci(n: int) -> int:
 
     if n == 0:
         return 0
-    if n == 1:
-        return 1
 
-    return fibonacci(n-1) + fibonacci(n-2)
+    a = 0
+    b = 1
+    for i in range(2, n+1):
+        a, b = b, a+b
+    return b
 
 
 def lambda_handler(event, context):
-    """Lambda function for recursive Fibonacci
-    """
+    """Lambda function for iterative Fibonacci"""
 
     return fibonacci(event['n'])
