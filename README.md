@@ -1,9 +1,11 @@
 # mathfun
 Package with implementation of AWS Lambda functions 
 which compute several mathematical functions:
-- [Fibonacci](https://en.wikipedia.org/wiki/Fibonacci_number)
+- [Fibonacci](https://en.wikipedia.org/wiki/Fibonacci_number) R+B
 - [Ackermann](https://en.wikipedia.org/wiki/Ackermann_function)
 - [Factorial](https://en.wikipedia.org/wiki/Factorial)
+
+Some are in recursive version only (R), others have better version (B) as well.
 
 ## Dependencies
 Recommended usage is to install virtual environment 
@@ -63,3 +65,10 @@ python manual_run.py
   + **Note:** Works only for single-file lambdas. For now.
 
 Enjoy the results :)
+
+# Note
+In lambda tests something from boto3 throws warning in the console:
+`ResourceWarning: unclosed <ssl.SSLSocket...`
+
+It's still [open issue](https://github.com/boto/boto3/issues/454) 
+why that warning comes. Seems that it can be safely ignored.
