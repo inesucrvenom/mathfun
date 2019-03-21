@@ -37,7 +37,7 @@ pip install ansible
 - Setup your AWS credentials and region with `aws configure`
   + Open AWS account if you don't have it
   + Get key for programmatic access 
-    + create AWS IAM role, I used full access one (not wise!)
+  (eg [check here](https://hackernoon.com/creating-serverless-functions-with-python-and-aws-lambda-901d202d45dc) 
 - Deploy lambdas
 ```
 ansible-playbook deploy_all_lambdas.yml
@@ -53,7 +53,7 @@ python manual_run.py
 - Available tests:
   - local - main purpose was testing logic 
   - lambda - seeing responses and being able to evaluate big cases
-    + don't forget to be oneline and deploy lambdas before testing
+    + don't forget to be online and deploy lambdas before testing
 
 - If you want to create own lambda:
   + filename starts with lambda eg: `lambda_test_function`
@@ -63,7 +63,3 @@ python manual_run.py
   + **Note:** Works only for single-file lambdas. For now.
 
 Enjoy the results :)
-
-## todo:
-+ test invoke_lambda, reduce tests for fibonacci recursive and 
-consequently for all future lambdas
