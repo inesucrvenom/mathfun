@@ -1,10 +1,8 @@
-from test.test_lambda.run_lambda import show_result
+from test.run_lambda import show_result
 
 
 def run_all():
     """Create own lambda invocations"""
-
-    # print(show_result('lambda_simple_test', {'n': 33, 'm': 64, 'a': 14}))
 
     # print(show_result('lambda_fibonacci_recursive', {'n': 2}))
     # print(show_result('lambda_fibonacci_recursive', {'n': -2}))
