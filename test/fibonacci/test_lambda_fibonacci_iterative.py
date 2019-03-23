@@ -6,7 +6,7 @@ Deploy lambda to AWS before running this.
 """
 
 import unittest
-from test_lambda.run_lambda import invoke_lambda
+from test.run_lambda import invoke_lambda
 
 
 def call_lambda(val: int) -> int:

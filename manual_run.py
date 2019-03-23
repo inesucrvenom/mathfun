@@ -1,4 +1,4 @@
-from test_lambda.run_lambda import show_result
+from test.test_lambda.run_lambda import show_result
 
 
 def run_all():
