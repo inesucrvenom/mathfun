@@ -18,16 +18,16 @@ def invoke_lambda(lambda_name: str, parameters: dict) -> (int, int):
     - get Exception when result isn't already explained by lambda result.
     - re-raise Exception for all other cases.
     """
-    client = boto3.client('lambda')
+    client = boto3.client("lambda")
     response = client.invoke(
         FunctionName=lambda_name,
-        LogType='Tail',
-        InvocationType='RequestResponse',
+        LogType="Tail",
+        InvocationType="RequestResponse",
         Payload=json.dumps(parameters),
     )
 
     # extract human readable Payload of type <botocore.response.StreamingBody>
-    result_json = json.loads(response['Payload'].read().decode("utf-8"))
+    result_json = json.loads(response["Payload"].read().decode("utf-8"))
 
     try:
         result_value = int(result_json)

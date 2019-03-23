@@ -4,7 +4,7 @@ import test.fibonacci.basetests_fibonacci as BT
 
 
 def call_function(val: int) -> int:
-    return invoke_lambda('lambda_fibonacci_iterative', {'n': val})
+    return invoke_lambda("lambda_fibonacci_iterative", {"n": val})
 
 
 class Test_ValidInput(unittest.TestCase, BT.ValidInput):
@@ -23,5 +23,5 @@ class Test_RunningTime(unittest.TestCase):
         self.assertNotIsInstance(call_function(1000), Exception)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

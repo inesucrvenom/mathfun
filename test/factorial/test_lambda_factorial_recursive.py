@@ -4,7 +4,7 @@ import test.factorial.basetests_factorial as BT
 
 
 def call_function(val: int) -> int:
-    return invoke_lambda('lambda_factorial_recursive', {'n': val})
+    return invoke_lambda("lambda_factorial_recursive", {"n": val})
 
 
 class Test_ValidInput(unittest.TestCase, BT.ValidInput):
@@ -26,5 +26,5 @@ class Test_RunningTime(unittest.TestCase):
         with self.assertRaises(Exception): call_function(1000)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

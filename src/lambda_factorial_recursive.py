@@ -20,4 +20,4 @@ def factorial(n: int) -> int:
 
 def lambda_handler(event, context):
     """Lambda function for recursive factorials"""
-    return factorial(event['n'])
+    return factorial(event["n"])

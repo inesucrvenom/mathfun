@@ -11,5 +11,5 @@ def run_all():
     print(show_result('lambda_factorial_iterative', {'n': 20}))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run_all()

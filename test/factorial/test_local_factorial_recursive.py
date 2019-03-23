@@ -26,5 +26,5 @@ class Test_Runningtime(unittest.TestCase):
         with self.assertRaises(Exception): call_function(1000)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

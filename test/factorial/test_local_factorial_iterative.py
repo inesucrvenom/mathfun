@@ -23,5 +23,5 @@ class Test_RunningTime(unittest.TestCase):
         self.assertNotIsInstance(call_function(40000), Exception)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
