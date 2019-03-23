@@ -81,11 +81,13 @@ Provided config files:
   -> comparison for the same functions, with cap at max allowed runtime 
 
 In Cloudwatch console 
-- from Dashboards > add widget
+- in dashboards > create dashboard > add widget
 - pick 'line' > configure
 - in tab 'Source' > paste content of the provided config file
 - click update > create widget
 
+
+In the same console, detailed analysing of logs is also possible.
 
 ## Note
 In lambda tests something from boto3 throws this warning in the console:
