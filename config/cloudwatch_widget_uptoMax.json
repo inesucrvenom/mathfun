@@ -1,0 +1,20 @@
+{
+    "metrics": [
+        [ "AWS/Lambda", "Duration", "FunctionName", "lambda_factorial_iterative", { "period": 60, "yAxis": "left", "stat": "Maximum" } ],
+        [ "...", "lambda_factorial_recursive", { "period": 60, "stat": "Maximum" } ],
+        [ "...", "lambda_fibonacci_iterative", { "period": 60, "stat": "Maximum" } ],
+        [ "...", "lambda_fibonacci_recursive", { "period": 60, "stat": "Maximum" } ],
+        [ "...", "lambda_ackermann_recursive", { "period": 60, "stat": "Maximum" } ]
+    ],
+    "view": "timeSeries",
+    "stacked": false,
+    "region": "eu-central-1",
+    "yAxis": {
+        "left": {
+            "min": 0,
+            "showUnits": true
+        }
+    },
+    "title": "compare lambdas",
+    "period": 300
+}
