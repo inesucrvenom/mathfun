@@ -8,7 +8,6 @@ def factorial(n: int) -> int:
     - TypeError for given non integers
     - ValueError for given negative integers
     """
-
     if type(n) is not int:
         raise TypeError("n isn't integer")
     if n < 0:
@@ -16,12 +15,9 @@ def factorial(n: int) -> int:
 
     if n == 0:
         return 1
-
     return n * factorial(n-1)
 
 
 def lambda_handler(event, context):
-    """Lambda function for recursive factorials
-    """
-
+    """Lambda function for recursive factorials"""
     return factorial(event['n'])

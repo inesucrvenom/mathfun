@@ -11,7 +11,6 @@ def fibonacci(n: int) -> int:
     - TypeError for given non integers
     - ValueError for given negative integers
     """
-
     if type(n) is not int:
         raise TypeError("n isn't integer")
     if n < 0:
@@ -29,5 +28,4 @@ def fibonacci(n: int) -> int:
 
 def lambda_handler(event, context):
     """Lambda function for iterative Fibonacci"""
-
     return fibonacci(event['n'])
