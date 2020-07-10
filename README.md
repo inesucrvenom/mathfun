@@ -1,6 +1,6 @@
 # mathfun
 
-Package with implementation of several mathematical functions on AWS Lambda:
+Package with implementation of a few functions using AWS Lambda:
 - [Fibonacci](https://en.wikipedia.org/wiki/Fibonacci_number) (x2)
 - [Ackermann](https://en.wikipedia.org/wiki/Ackermann_function)
 - [Factorial](https://en.wikipedia.org/wiki/Factorial) (x2)
