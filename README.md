@@ -95,3 +95,6 @@ In lambda tests something from boto3 throws this warning in the console:
 
 It's still [open issue](https://github.com/boto/boto3/issues/454) 
 why that warning happens, but it seems like it can be safely ignored.
+
+## Licence
+Published under [MIT licence](LICENCE)
