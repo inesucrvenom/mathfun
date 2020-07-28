@@ -10,12 +10,12 @@ All are implemented for non-negative integers.
 
 ## Dependencies
 
-Recommended usage is to install virtual environment 
+Recommended usage is to install virtual environment
 and put in it whatever packages you need, not to disturb your system.
-  
-I've installed some packages system-wide and some in venv 
+
+I've installed some packages system-wide and some in venv
 (mostly those I've installed with pip).
-  
+
 - python >= 3.6
 - pip
 - virtual environment
@@ -35,15 +35,15 @@ pip install boto3
 pip install botocore
 pip install ansible
 ```
-- Activate your venv if you're using it 
+- Activate your venv if you're using it
 ```
 $ source ./path_to_env/bin/activate
 ```
 - Get this package & unpack zip OR pull from github
 - Setup your AWS credentials and region with `aws configure`
   + Open AWS account if you don't have it
-  + Get key for programmatic access 
-  (eg [check here](https://hackernoon.com/creating-serverless-functions-with-python-and-aws-lambda-901d202d45dc)) 
+  + Get key for programmatic access
+  (eg [check here](https://hackernoon.com/creating-serverless-functions-with-python-and-aws-lambda-901d202d45dc))
 - Deploy lambdas
 ```
 $ ansible-playbook deploy_all_lambdas.yml
@@ -78,9 +78,9 @@ Provided config files:
 - `dashboard/cloudwatch_widget_upto500ms.json`
   -> comparison of all mentioned lambda versions, with cap on 500ms runtime.
 - `dashboard/cloudwatch_widget_uptoMax.json`
-  -> comparison for the same functions, with cap at max allowed runtime 
+  -> comparison for the same functions, with cap at max allowed runtime
 
-In Cloudwatch console 
+In Cloudwatch console
 - in dashboards > create dashboard > add widget
 - pick 'line' > configure
 - in tab 'Source' > paste content of the provided config file
@@ -93,8 +93,10 @@ In the same console, detailed analysing of logs is also possible.
 In lambda tests something from boto3 throws this warning in the console:
 `ResourceWarning: unclosed <ssl.SSLSocket...`
 
-It's still [open issue](https://github.com/boto/boto3/issues/454) 
+It's still [open issue](https://github.com/boto/boto3/issues/454)
 why that warning happens, but it seems like it can be safely ignored.
 
 ## Licence
+**Tl;dr: Learn from here, don't present materials as yours.**
+
 Published under [MIT licence](LICENCE)
