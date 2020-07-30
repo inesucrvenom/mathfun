@@ -1,4 +1,4 @@
-![logo](logo-repo.png)
+![logo](repo-code.png)
 
 # mathfun
 
@@ -102,3 +102,4 @@ why that warning happens, but it seems like it can be safely ignored.
 **Tl;dr: Learn from here, don't present materials as yours.**
 
 Published under [MIT licence](LICENCE)
+![logo](repo-code.png)
