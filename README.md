@@ -1,3 +1,5 @@
+![logo](logo-repo.png)
+
 # mathfun
 
 Package with implementation of a few functions using AWS Lambda:
