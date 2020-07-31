@@ -98,8 +98,8 @@ In lambda tests something from boto3 throws this warning in the console:
 It's still [open issue](https://github.com/boto/boto3/issues/454)
 why that warning happens, but it seems like it can be safely ignored.
 
-## Background thoughts
-[Read in this post](https://inesucrvenom.github.io/2019/03/aws-lambda-mathfun.html)
+## Decisions & thoughts
+Post about background thoughts read [here](https://inesucrvenom.github.io/2019/03/aws-lambda-mathfun.html)
 
 ## Licence
 **Tl;dr: Learn from here, don't present materials as yours.**
