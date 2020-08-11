@@ -1,4 +1,4 @@
-![logo](repo-code.png)
+![logo](repo-python.png)
 
 # mathfun
 
@@ -102,8 +102,6 @@ why that warning happens, but it seems like it can be safely ignored.
 Post about background thoughts read [here](https://inesucrvenom.github.io/2019/03/aws-lambda-mathfun.html)
 
 ## Licence
-**Tl;dr: Learn from here, don't present materials as yours.**
-
 Published under [MIT licence](LICENCE)
 
-![logo](repo-code.png)
+![logo](repo-python.png)
